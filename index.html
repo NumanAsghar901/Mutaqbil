@@ -181,6 +181,8 @@
     background:var(--glass-strong);border:1px solid var(--glass-border);
     border-radius:28px;box-shadow:var(--shadow-lift);backdrop-filter:blur(20px);
     padding:22px;transform:perspective(1400px) rotateX(4deg);
+    position:relative; /* ensure it's a stacking context */
+    z-index:1;
   }
   .dash-topbar{display:flex;align-items:center;gap:8px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line);}
   .dash-topbar span{width:10px;height:10px;border-radius:50%;background:var(--line);}
@@ -190,14 +192,32 @@
   .dash-title{margin-left:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-faint);}
 
   .float-card{
-    position:absolute;background:var(--glass-strong);border:1px solid var(--glass-border);
-    border-radius:16px;box-shadow:var(--shadow-soft);backdrop-filter:blur(16px);
-    padding:14px 16px;animation:floaty 5s ease-in-out infinite;
+    position:absolute;
+    z-index:10; /* ensure they are above the dash-card */
+    background:var(--glass-strong);
+    border:1px solid var(--glass-border);
+    border-radius:16px;
+    box-shadow:var(--shadow-soft);
+    backdrop-filter:blur(16px);
+    padding:14px 16px;
+    animation:floaty 5s ease-in-out infinite;
   }
   @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
-  .float-1{top:-30px;left:-40px;animation-delay:0s;}
-  .float-2{bottom:10px;right:-46px;animation-delay:1.2s;}
-  .float-3{top:40%;right:-60px;animation-delay:2s;}
+  .float-1{
+    top:-40px;
+    left:-50px;
+    animation-delay:0s;
+  }
+  .float-2{
+    bottom:20px;
+    right:-60px;
+    animation-delay:1.2s;
+  }
+  .float-3{
+    top:30%;
+    right:-70px;
+    animation-delay:2s;
+  }
 
   /* ---------- Section headers ---------- */
   .section{padding:110px 0;position:relative;}
@@ -626,7 +646,7 @@ box-shadow:0 0 18px rgba(0,211,184,.5);
         </div>
       </div>
       <div class="float-card float-3">
-        <svg width="70" height="40" viewBox="0 0 70 40"><polyline points="0,32 12,26 24,30 36,14 48,18 60,6 70,10" fill="none" stroke="#00A8E8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="70" height="40" viewBox="0 0 80 40"><polyline points="0,32 12,26 24,30 36,14 48,18 60,6 70,10" fill="none" stroke="#00A8E8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
 
       <div class="dash-card">
@@ -647,16 +667,12 @@ box-shadow:0 0 18px rgba(0,211,184,.5);
           </div>
           <div class="bcard b-span2" style="padding:16px;">
             <h4>Weekly completion</h4>
-            <div class="chart-wrap" style="height:90px;"><canvas id="heroChart"></canvas></div>
+            <div class="chart-wrap" style="height:90px;"><img src="image2.jpg" alt="Weekly Completion Chart"></div>
           </div>
         </div>
       </div>
       <!-- Decorative moving hero ad -->
-      <div class="hero-ad" aria-hidden="true">
-        <div class="ad-img"></div>
-        <div class="ad-line"></div>
-        <div class="ad-line" style="width:50%"></div>
-      </div>
+      
     </div>
   </div>
 </section>
@@ -717,11 +733,15 @@ box-shadow:0 0 18px rgba(0,211,184,.5);
     <div class="bento reveal" id="mainBento">
       <div class="bcard b-span2">
         <h4>Task completion — last 8 weeks</h4>
-        <div class="chart-wrap tall"><canvas id="areaChart"></canvas></div>
+        <div class="chart-wrap tall"> <img src="image1.jpg"
+             alt="Task Completion"
+             style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
       </div>
       <div class="bcard b-span2">
         <h4>Productivity by day</h4>
-        <div class="chart-wrap tall"><canvas id="barChart"></canvas></div>
+        <div class="chart-wrap tall"><img src="image2.jpg"
+             alt="Productivity by day"
+             style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
       </div>
 
       <div class="bcard">
